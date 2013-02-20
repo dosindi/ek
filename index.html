@@ -1,0 +1,309 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0">
+		<title>e-Kalondolondo</title>
+        <link type="text/css" rel="stylesheet" href="src/custom.css" />
+        <link rel="stylesheet" href="src/libs/css/activityIndicator.css" type="text/css" />
+        <link rel="stylesheet" href="index.css" />
+        <link rel="stylesheet" href="src/bootstrap/css/bootstrap-responsive.css" type="text/css"/>
+        <link rel="stylesheet" type="text/css" href="src/jquery.mobile.simpledialog.min.css" />
+        <link rel="stylesheet" href="jquery.mobile/jquery.mobile-1.2.0.min.css" />
+
+        <script type="text/javascript" charset="utf-8" src="cordova-2.0.0.js"></script>
+
+        <script src="jquery.mobile/jquery-1.8.2.min.js"></script>
+        <script src="jquery.mobile/jquery.mobile-1.2.0.min.js"></script>
+
+    </head>
+	<body onload="init()">
+		<div id="login-page" data-role="page">
+			<div data-role="header" data-theme="b">
+				<h1 class="fancy"><img alt="icon" src="images/wvm.png" style="padding-top: 10px" width="200px" height="120px">
+				<br/>
+				e-Kalondolondo</h1>
+			</div>
+			<div id="content_id" data-role="content">
+				<form id="loginForm">
+					<div data-role="fieldcontain" class="ui-hide-label">
+						<label for="username">Username:</label>
+						<input type="text" name="username" id="username1" value="" style="padding-top:5px" width="100px"  placeholder="Username" />
+					</div>
+					<div data-role="fieldcontain" class="ui-hide-label">
+						<label for="password">Password:</label>
+						<input type="text" name="password" id="password1" value="" width="100px" placeholder="Password" />
+					</div>
+					<div id="requiredFields"></div>
+					<br />
+					<!--input type="submit" value="Login" id="submitButton"-->
+					<div class="ui-grid-a">
+						<div class="ui-block-a">
+							<a href="#" data-role="button" width="100px" height="30px" id="login-button" class="btn btn-primary">Login</a>
+						</div>
+						<div class="ui-block-b">
+							
+							<a data-role="button"  width="100px" height="30px" onclick="navigator.app.exitApp()" class="btn btn-primary">Exit</a>
+						</div>
+					</div><!-- /grid-a -->
+				</form>
+			</div>
+			<div data-role="footer" data-theme="b">
+				<h4>Copyright &copy; SecureNET Technologies (k) Ltd</h4>
+			</div>
+		</div>
+		<!-- Start of home page -->
+		<div data-role="page" id="home-page">
+			<div data-role="header" data-theme="b">
+				<a href="#" data-role="button" data-toggle="modal" data-icon="gear" id="upload_button" class="ui-btn-left">Upload</a>
+				<h1><img alt="icon" src="images/wvm.png" width="100px" height="50px">
+				<br/>
+				e-Kalondolondo</h1>
+				<a href="#login-page" data-transition="pop" data-role="button" data-icon="minus" id="logout-button" class="ui-btn-right" >Logout</a>
+			</div>
+			<div data-role="content">
+				<div class="api-div">
+					<h2 >Welcome <label id="usr">Enum</label>
+					<input id="usrId" type="hidden">
+					</input>,</h2>
+					<br/>
+
+					<h4 class="help" >Select a Survey tool from the list below </h4>
+				</div>
+				<ul data-role="listview" data-inset="true" id="menu_id">
+					<li>
+						<a id="hm" href="#">Harmonized Monitoring Survey Tool</a>
+					</li>
+					<li>
+						<a id="cg" href="#">Care Giver Survey Tool</a>
+					</li>
+					<li>
+						<a id="yb" href="#" onclick="loadHeader(3);">Youth Behaviour Survey Tool</a>
+					</li>
+					<li>
+						<a id="fl" href="#" onclick="loadHeader(4);">Functional Literacy Assessment Tool (FLAT)</a>
+					</li>
+					<li>
+						<a id="gm" href="#" onclick="loadHeader(5);">Growth Monitoring Tool</a>
+					</li>
+				</ul>
+				<a href="#page7" data-transition="slideup" data-icon="arrow-d" data-role="button">View Messages</a>
+
+			</div><!-- /content -->
+			<div data-role="footer" data-theme="b">
+				<h4>Copyright &copy; SecureNET Technologies (k) Ltd</h4>
+			</div>
+		</div><!-- /page -->
+
+		<!-- Start of Survey1a page -->
+		<div data-role="page" id="survey1a-page">
+			<div data-role="header" data-theme="b">
+				<h1 id="hd_sv">Header</h1>
+				<a href="#home-page" data-role="button" data-icon="home" id="add-button" class="ui-btn-right">Home</a>
+			</div>
+			<div data-role="content" class="api-div">
+                <div hidden="hidden">
+			    </br>
+                opt_rows_returned=><label id="opt_rows_returned"></label></br>
+                i_type=><label id="i_type"></label></br>
+                i_id=><label id="i_id"></label></br>
+                </div>
+				<a href="#" id="view-report-btn" data-icon="grid" data-role="button" align="middle">View Report</a>
+				<div id="ph1"></div>
+				<div id="ph2"></div>
+				<div id="valid"></div>
+				<div class="ui-grid-b">
+					<div class="ui-block-a">
+						<a id="previous-btn" data-role="button" align="middle" data-icon="arrow-l"onclick="previousFunc('id')" >Previous</a>
+					</div>
+					<div class="ui-block-b">
+						<a id="next-btn" data-role="button" data-icon="arrow-r" data-iconpos="right" align="middle" onclick="nextFunc('id');" >Next</a>
+					</div>
+				</div>
+			</div>
+			<div data-role="footer" data-theme="b">
+				<h4>Copyright &copy; SecureNET Technologies (k) Ltd</h4>
+			</div>
+		</div>
+		<!-- CGST List Modules-->
+		<div data-role="page" id="survey2-page">
+			<div data-role="header" data-theme="b">
+				<h1 id="hd1_hm">CARE GIVER SURVEY TOOL</h1>
+				<a href="#home-page" data-role="button" data-icon="home" id="add-button" class="ui-btn-right">Home</a>
+			</div>
+			<div data-role="content" class="api-div">
+				<blockquote>
+					<h2>Instructions</h2>
+				</blockquote>
+				<label id="userId"></label>
+				<h4 class="help" ><strong>Fill</strong> out accordingly as per the program you are visiting and Press <strong> START </strong> to answer subsequent questions as per the <strong>module</strong> you have selected</h4>
+				<table id="deviceinfo">
+					<tr spancol="2">
+						<th colspan="2" align="center">Program/Project Profile</th>
+					</tr>
+					<tr>
+						<td>Name of Program/Project (ADP)</td>
+						<td class="alt"><select name="type" id="adpList"></select></td>
+					</tr>
+					<tr>
+						<td>Location (TA and District)<label id="adpID"></label></td>
+						<td class="alt" style="text-align: center"><strong id="TA" >&nbsp;</strong></td>
+					</tr>
+					<tr>
+						<td>Reporting Period (Month and FY)</td>
+						<td class="alt"><strong id="pgversion">&nbsp;</strong></td>
+					</tr>
+					<tr>
+						<td>Name of Person Compiling Report:</td>
+						<td class="alt"><strong id="person_id">&nbsp;</strong></td>
+					</tr>
+					<tr>
+						<td>Position of Person Compiling Report:</td>
+						<td class="alt"style="text-align: center"><strong id="version" >-</strong></td>
+					</tr>
+					<tr>
+						<td>Module:</td>
+						<td class="alt"><select name="type" id="surveytooltypeList"></select></td>
+					</tr>
+                    <tr>
+                        <td>Selected Module:<label id="modID"></label></td>
+                        <td class="alt"><label STYLE="font-weight: bold" id="mod"></label></td>
+                    </tr>
+				</table>
+				<a data-role="button" align="middle" href="#" id="start_cg_btn">START</a>
+			</div>
+			<div data-role="footer" data-theme="b">
+				<h4>Copyright &copy; SecureNET Technologies (k) Ltd</h4>
+			</div>
+		</div>
+
+		<!-- Modules not set form-->
+		<div id="page0" data-role="page">
+			<div data-role="header" data-theme="b">
+				<h1 id="hd1">CARE GIVER SURVEY TOOL</h1>
+				<a href="#home-page" data-role="button" data-icon="home" id="add-button" class="ui-btn-right">Home</a>
+			</div>
+			<div data-role="content" class="api-div">
+				<blockquote>
+					<h2>Instructions</h2>
+				</blockquote>
+				<h4 class="help" ><strong>Sorry</strong> No modules have been set, Kindly contact your DME to set the module or go to the <a href="#home-page" data-role="button" data-icon="home" id="add-button">Home screen</a> and select a survery tool that has modules already set</h4>
+			</div>
+			<div data-role="footer" data-theme="b">
+				<h4>Copyright &copy; SecureNET Technologies (k) Ltd</h4>
+			</div>
+		</div>
+		<!-- Message Form-->
+		<div id="page7" data-role="page">
+			<div data-role="header" data-theme="b">
+				<a href="#" data-role="button" data-icon="grid" id="view_surveys_btn" class="ui-btn-left">View Summary</a>
+				<h1 id="hd1">Received Messages</h1>
+				<a href="#home-page" data-role="button" data-icon="home" id="home-button" class="ui-btn-right">Home</a>
+			</div>
+			<div data-role="content" class="api-div">
+				<h4 class="help" >View Messages Received</h4>
+			</div>
+			<ul data-role="listview" data-inset="true" id="menu_id">
+				<li data-role="list-divider" role="heading" class="ui-li ui-li-divider ui-btn ui-bar-b ui-corner-top ui-btn-up-undefined">
+					Content
+				</li>
+				<li data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-li-has-count ui-btn-up-c">
+					<div class="ui-btn-inner ui-li">
+						<div class="ui-btn-text">
+							<a href="#" id="inbox_btn" class="ui-link-inherit">Inbox <span class="ui-li-count ui-btn-up-c ui-btn-corner-all">0</span></a>
+						</div><span class="ui-icon ui-icon-arrow-r ui-icon-shadow"></span>
+					</div>
+				</li>
+			</ul>
+			<h3 class="help">Test Available users(to be removed)</h3>
+			<form id="mycontact">
+				<fieldset>
+					<legend>
+						Your details
+					</legend>
+					<ol>
+						<li>
+							<label for="username">Username</label>
+							<input id="username" type="text" placeholder="username" required autofocus pattern=" ">
+							<input type="hidden" id="id"/>
+						</li>
+						<li>
+							<label for="useremail">Password</label>
+							<input id="useremail" type="text" placeholder="password" required pattern=" ">
+						</li>
+					</ol>
+				</fieldset>
+				<div class="ui-grid-a">
+					<div class="ui-block-a">
+                        <a data-role="button" id="btnReset" class="btn btn-primary" type=submit>
+							RESET
+						</a>
+					</div>
+					<div class="ui-block-b">
+						<a data-role="button" id="submitButton" type="submit" class="btn btn-primary">
+							SAVE
+						</a>
+					</div>
+					<div class="ui-block-a">
+                        <a data-role="button" id="btnUpdate" class="btn btn-primary" type=submit>
+							UPDATE
+						</a>
+					</div>
+					<div class="ui-block-b">
+                        <a data-role="button" id="btnDrop" class="btn btn-danger" type=submit>
+							DROP
+						</a>
+					</div>
+				</div>
+			</form>
+			<br />
+			<div id="results"></div>
+			<div data-role="footer" data-theme="b">
+				<h4>Copyright &copy; SecureNET Technologies (k) Ltd</h4>
+			</div>
+		</div>
+		<!-- Survey report page-->
+		<div id="page8" data-role="page">
+			<div data-role="header" data-theme="b">
+				<h1 id="hd_sr">Survey Report</h1>
+				<a href="#" data-role="button" data-icon="home" id="gohome-page8" class="ui-btn-right">Home</a>
+			</div>
+			<div data-role="content" class="api-div">
+                <div id="total_surveys"><span></span></div>
+				<h4 class="help" >List of Surveys</h4>
+                </br>
+                </br>
+                <ul id="surveyList" class="nav nav-list bs-docs-sidenav affix-top">
+
+                </ul>
+                </br>
+                </br>
+
+			    <div id="sv_table"></div>
+                <ul id="sv_list" class="nav nav-list bs-docs-sidenav affix-top"></ul>
+            </div>
+
+			<!--div data-role="footer" data-theme="b">
+				<h4>Copyright &copy; SecureNET Technologies (k) Ltd</h4>
+			</div-->
+		</div>
+
+
+
+
+
+		<!-- App specific scripts -->
+		<script src="js/app.js"></script>
+
+        <script type="text/javascript" src="src/jquery.mobile.simpledialog2.min.js"></script>
+
+
+        <script type="text/javascript" charset="utf-8" src="phonegap-1.4.1.js"></script>
+
+        <script src="src/libs/noClickDelay.js"></script>
+        <script src="jquery.mobile/date.format.js"></script>
+        <script src="src/libs/jquery.animate-enhanced.js"></script>
+        <script src="src/libs/iscroll.js"></script>
+
+
+        <script src="src/bootstrap/js/bootstrap.min.js"></script>
+	</body>
+</html>
